@@ -4,7 +4,7 @@ pipeline {
     stage('build') {
       agent {
         docker {
-          image node:12.18.2
+          image 'node:12.18.2'
         }
       }
       when {
