@@ -6,7 +6,7 @@ pipeline {
         branch 'develop'
       }
       environment {
-        SSH_CREDS = credentials('123456')
+        SSH_CREDS = "123456"
       }
       steps {
         /* insert declarative step here */
