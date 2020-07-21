@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     APP_NAME = "jenkins-pipeline"
+
     // DOCKER_HOST = "tcp://172.17.0.2:2375"
   }
   stages {
@@ -51,8 +52,9 @@ pipeline {
         // sh 'docker --version'
         // sh 'echo -n $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
         sh 'printenv'
+        def app
         app = docker.build("jenkins-pipeline")
-        docker.withRegistry($DOCKER_REGISTRY, 'ecr-staging-credential') {
+        docker.withRegistry('https://966432988823.dkr.ecr.us-east-1.amazonaws.com', 'ecr-staging-credential') {
           app.push('develop')
         }
         echo 'stage docker success'
