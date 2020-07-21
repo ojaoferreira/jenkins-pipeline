@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     APP_NAME = "jenkins-pipeline"
-    APP = ""
+    DOCKER_TLS_CERTDIR: ""
     // DOCKER_HOST = "tcp://172.17.0.2:2375"
   }
   stages {
@@ -57,6 +57,7 @@ pipeline {
         /* insert declarative step here */
         // sh 'docker --version'
         // sh 'echo -n $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
+        // $GIT_BRANCH
         sh 'printenv'
         echo 'stage docker success'
       }
