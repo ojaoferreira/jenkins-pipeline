@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     APP_NAME = "jenkins-pipeline"
-    DOCKER_TLS_CERTDIR: ""
+    DOCKER_TLS_CERTDIR = ""
     // DOCKER_HOST = "tcp://172.17.0.2:2375"
   }
   stages {
