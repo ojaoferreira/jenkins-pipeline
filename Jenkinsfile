@@ -5,9 +5,6 @@ pipeline {
       when {
         branch 'develop'
       }
-      environment {
-
-      }
       steps {
         /* insert declarative step here */
         echo 'stage build success'
