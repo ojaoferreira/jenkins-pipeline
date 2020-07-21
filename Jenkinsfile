@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  environment {
+    DOCKER_REGISTRY = "https://966432988823.dkr.ecr.us-east-1.amazonaws.com"
+    APP_NAME = "jenkins-pipeline"
+  }
   stages {
     stage('build') {
       agent {
@@ -12,8 +16,9 @@ pipeline {
       }
       steps {
         /* insert declarative step here */
-        echo 'stage build success'
         sh 'node --version'
+        sh 'npm --version'
+        echo 'stage build success'
       }
     }
     stage('test') {
@@ -35,11 +40,17 @@ pipeline {
       }
     }
     stage('docker') {
+      agent {
+        docker {
+          image 'docker:19.03.12'
+        }
+      }
       when {
         branch 'develop'
       }
       steps {
         /* insert declarative step here */
+        sh 'docker --version'
         echo 'stage docker success'
       }
     }
