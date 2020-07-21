@@ -11,7 +11,7 @@ pipeline {
       steps {
         /* insert declarative step here */
         echo 'stage build success - test #4'
-        sh 'echo $SSH_CREDS'
+        sh 'echo "$SSH_CREDS"'
       }
     }
     // stage('test') {
