@@ -4,7 +4,7 @@ pipeline {
     APP_NAME = "jenkins-pipeline"
     DOCKER_DRIVER = "overlay2"
     DOCKER_TLS_CERTDIR = ""
-    // DOCKER_HOST = "tcp://172.17.0.2:2375"
+    DOCKER_HOST = "tcp://localhost:2375"
   }
   stages {
     stage('build') {
@@ -42,11 +42,11 @@ pipeline {
       }
     }
     stage('docker') {
-      agent {
-        docker {
-          image 'docker:19.03.12-dind'
-        }
-      }
+      // agent {
+      //   docker {
+      //     image 'docker:19.03.12-dind'
+      //   }
+      // }
       when {
         branch 'develop'
       }
