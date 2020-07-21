@@ -13,6 +13,7 @@ pipeline {
       steps {
         /* insert declarative step here */
         echo 'stage build success'
+        sh 'node --version'
       }
     }
     stage('test') {
