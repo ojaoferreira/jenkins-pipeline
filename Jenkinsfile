@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     APP_NAME = "jenkins-pipeline"
+    DOCKER_HOST = "tcp://localhost:2376"
   }
   stages {
     stage('build') {
@@ -41,7 +42,7 @@ pipeline {
     stage('docker') {
       agent {
         docker {
-          image 'docker:19.03.12'
+          image 'docker:19.03.12-dind'
         }
       }
       when {
