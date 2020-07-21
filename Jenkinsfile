@@ -1,7 +1,6 @@
 pipeline {
   agent any
   environment {
-    DOCKER_REGISTRY = "https://966432988823.dkr.ecr.us-east-1.amazonaws.com"
     APP_NAME = "jenkins-pipeline"
   }
   stages {
@@ -48,9 +47,14 @@ pipeline {
       when {
         branch 'develop'
       }
+      environment {
+        DOCKER_REGISTRY = "https://966432988823.dkr.ecr.us-east-1.amazonaws.com"
+        DOCKER_PASS = credentials('devops-stg-ci')
+      }
       steps {
         /* insert declarative step here */
         sh 'docker --version'
+        sh 'echo -n $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
         echo 'stage docker success'
       }
     }
