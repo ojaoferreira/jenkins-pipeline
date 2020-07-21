@@ -59,6 +59,7 @@ pipeline {
         // sh 'echo -n $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
         // $GIT_BRANCH
         sh 'printenv'
+        sh 'echo $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
         echo 'stage docker success'
       }
     }
