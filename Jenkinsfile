@@ -61,6 +61,7 @@ pipeline {
         // $GIT_BRANCH
         sh 'printenv'
         sh 'echo $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
+        sh 'docker build -t $APP_NAME -t $APP_NAME:$GIT_BRANCH .'
         echo 'stage docker success'
       }
     }
