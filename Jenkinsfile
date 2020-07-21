@@ -51,7 +51,7 @@ pipeline {
         branch 'develop'
       }
       environment {
-        DOCKER_REGISTRY = "https://966432988823.dkr.ecr.us-east-1.amazonaws.com"
+        DOCKER_REGISTRY = "966432988823.dkr.ecr.us-east-1.amazonaws.com"
         DOCKER_PASS = credentials('ecr-staging-credential')
       }
       steps {
@@ -62,7 +62,7 @@ pipeline {
         sh 'printenv'
         sh 'echo $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
         sh 'docker build -t $DOCKER_REGISTRY/$APP_NAME:$GIT_BRANCH .'
-        sh 'docker push '
+        sh 'docker push $DOCKER_REGISTRY/$APP_NAME:$GIT_BRANCH'
         echo 'stage docker success'
       }
     }
