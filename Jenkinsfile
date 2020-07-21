@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     APP_NAME = "jenkins-pipeline"
+    DOCKER_DRIVER = "overlay2"
     DOCKER_TLS_CERTDIR = ""
     // DOCKER_HOST = "tcp://172.17.0.2:2375"
   }
