@@ -4,7 +4,7 @@ pipeline {
     stage('build') {
       steps {
         /* insert declarative step here */
-        echo 'stage build success'
+        echo 'stage build success - test #1'
       }
     }
     stage('test') {
