@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     APP_NAME = "jenkins-pipeline"
+    DOCKER_HOST = "tcp://localhost:2375"
   }
   stages {
     stage('build') {
