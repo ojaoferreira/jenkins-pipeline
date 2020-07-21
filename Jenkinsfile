@@ -5,10 +5,13 @@ pipeline {
       when {
         branch 'develop'
       }
+      environment {
+        SSH_CREDS = credentials('123456')
+      }
       steps {
         /* insert declarative step here */
         echo 'stage build success - test #4'
-        sh 'printenv'
+        sh 'echo $SSH_CREDS'
       }
     }
     // stage('test') {
