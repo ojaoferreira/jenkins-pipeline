@@ -2,6 +2,11 @@ pipeline {
   agent any
   stages {
     stage('build') {
+      agent {
+        docker {
+          image node:12.18.2
+        }
+      }
       when {
         branch 'develop'
       }
