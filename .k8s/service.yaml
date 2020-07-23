@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jenkins-pipeline
+spec:
+  selector:
+    app: jenkins-pipeline
+  type: ClusterIP
+  ports:
+  - name: jenkins-pipeline
+    port: 80
+    targetPort: 3000

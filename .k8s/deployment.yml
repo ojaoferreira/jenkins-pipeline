@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    downscaler/uptime: Mon-Fri 07:30-20:00 America/Bahia
+  labels:
+    app: jenkins-pipeline
+  name: jenkins-pipeline
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: jenkins-pipeline
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: jenkins-pipeline
+    spec:
+      containers:
+        - name: jenkins-pipeline
+          image: 966432988823.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline:develop
+          imagePullPolicy: IfNotPresent
+          env: []
+          ports:
+          - containerPort: 3000
+            name: app
+            protocol: TCP
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "128m"
+            limits:
+              cpu: "200m"
+              memory: "256m"
+          volumeMounts: []
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        instance-type: t3.large
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 200
+      volumes: []

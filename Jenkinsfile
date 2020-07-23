@@ -42,11 +42,6 @@ pipeline {
       }
     }
     stage('docker') {
-      // agent {
-      //   docker {
-      //     image 'docker:19.03.12-dind'
-      //   }
-      // }
       when {
         branch 'develop'
       }
@@ -56,10 +51,6 @@ pipeline {
       }
       steps {
         /* insert declarative step here */
-        // sh 'docker --version'
-        // sh 'echo -n $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
-        // $GIT_BRANCH
-        sh 'printenv'
         sh 'echo $DOCKER_PASS | docker login -u AWS --password-stdin $DOCKER_REGISTRY'
         sh 'docker build -t $DOCKER_REGISTRY/$APP_NAME:$GIT_BRANCH .'
         sh 'docker push $DOCKER_REGISTRY/$APP_NAME:$GIT_BRANCH'

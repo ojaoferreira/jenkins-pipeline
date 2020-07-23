@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
+  labels:
+    app: jenkins-pipeline
+  name: jenkins-pipeline
+spec:
+  rules:
+  - host: stg-service.labpetz.com.br
+    http:
+      paths:
+      - backend:
+          serviceName: jenkins-pipeline
+          servicePort: 80
+        path: /jenkins-pipeline(/|$)(.*)
+  tls:
+  - hosts:
+    - stg-service.labpetz.com.br
+    secretName: stg-service-tls
